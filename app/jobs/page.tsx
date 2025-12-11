@@ -34,7 +34,7 @@ export default function JobsPage() {
         setJobsError(null);
 
         const res = await fetch(
-          "https://script.google.com/macros/s/AKfycbz2_SYNhkbrBjp1Zv7zB2tQKesGNNtjQGgFBLsl7DmLd3PohCFBG0ZT9ojNReBXa2Zv/exec?type=anken_format"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/exec?type=anken_format`
         );
 
         if (!res.ok) {
