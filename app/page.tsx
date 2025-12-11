@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import Sidebar from "./components/Sidebar";
-import JobsPage from "./pages/JobsPage";
+'use client';
 
-function App() {
+import { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import JobsPage from './jobs/page';
+
+export default function Home() {
   const [activePage, setActivePage] = useState("jobs");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -82,5 +84,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

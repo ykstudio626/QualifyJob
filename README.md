@@ -1,10 +1,8 @@
-"# AIJOBMatching" 
+"# AIJOBMatching
 AIでJOBをマッチングするシステムです。
 
 ## フロントエンド
-React
-
-→Nextjs/Typescriptに移行
+Next.js / TypeScript
 
 ## API
 Dify

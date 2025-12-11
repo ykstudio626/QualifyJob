@@ -1,7 +1,24 @@
-// src/components/JobCard.jsx
+// app/components/JobCard.tsx
 import React from "react";
 
-export default function JobCard({ job, onOpenMail }) {
+interface Job {
+  ID?: string;
+  案件名?: string;
+  件名?: string;
+  作業場所?: string;
+  勤務形態?: string;
+  単価?: string;
+  稼働日付?: string;
+  必須スキル?: string;
+  メール本文?: string;
+}
+
+interface JobCardProps {
+  job: Job;
+  onOpenMail: () => void;
+}
+
+export default function JobCard({ job, onOpenMail }: JobCardProps) {
   const title = job["案件名"] || job["件名"];
   const location = job["作業場所"];
   const workStyle = job["勤務形態"];

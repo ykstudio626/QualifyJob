@@ -1,16 +1,30 @@
-import React, { useEffect, useState } from "react";
+'use client';
+
+import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 
 const PAGE_SIZE = 50; // 1ページあたり件数
 
+interface Job {
+  ID?: string;
+  案件名?: string;
+  件名?: string;
+  作業場所?: string;
+  勤務形態?: string;
+  単価?: string;
+  稼働日付?: string;
+  必須スキル?: string;
+  メール本文?: string;
+}
+
 export default function JobsPage() {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [jobsLoading, setJobsLoading] = useState(false);
-  const [jobsError, setJobsError] = useState(null);
+  const [jobsError, setJobsError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   // モーダル用 state
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isMailOpen, setIsMailOpen] = useState(false);
 
   useEffect(() => {
@@ -34,7 +48,7 @@ export default function JobsPage() {
         setCurrentPage(1);
       } catch (err) {
         console.error(err);
-        setJobsError(err.message);
+        setJobsError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
         setJobsLoading(false);
       }
@@ -52,7 +66,7 @@ export default function JobsPage() {
     : [];
 
   // モーダル制御用ハンドラ
-  const handleOpenMail = (job) => {
+  const handleOpenMail = (job: Job) => {
     setSelectedJob(job);
     setIsMailOpen(true);
   };
@@ -145,7 +159,7 @@ export default function JobsPage() {
     </div>
   );
 
-  function MailModal({ job, onClose }) {
+  function MailModal({ job, onClose }: { job: Job; onClose: () => void }) {
     const title = job["案件名"] || job["件名"];
     const mailBody = job["メール本文"];
 

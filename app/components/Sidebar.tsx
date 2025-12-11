@@ -1,7 +1,12 @@
 import React from "react";
 
-export default function Sidebar({ activePage, onChangePage }) {
-  const itemClass = (key) =>
+interface SidebarProps {
+  activePage: string;
+  onChangePage: (page: string) => void;
+}
+
+export default function Sidebar({ activePage, onChangePage }: SidebarProps) {
+  const itemClass = (key: string) =>
     `w-full text-left px-3 py-2 rounded mb-2 text-sm ${
       activePage === key
         ? "bg-slate-100 text-slate-900"
