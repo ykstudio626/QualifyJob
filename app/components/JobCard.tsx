@@ -7,7 +7,7 @@ interface Job {
   作業場所?: string;
   勤務形態?: string;
   単価?: string;
-  稼働日付?: string;
+  時期?: string;
   必須スキル?: string;
   メール本文?: string;
 }
@@ -22,7 +22,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
   const location = job["作業場所"];
   const workStyle = job["勤務形態"];
   const unitPrice = job["単価"];
-  const startDate = job["稼働日付"];
+  const startDate = job["時期"];
 
   const skills = (job["必須スキル"] || "")
     .split(/、|,/)
@@ -39,7 +39,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
         </p>
 
         <p className="text-sm text-slate-600 mt-1">単価: {unitPrice}</p>
-        <p className="text-xs text-slate-500 mt-1">稼働開始: {startDate}</p>
+        <p className="text-xs text-slate-500 mt-1">時期: {startDate}</p>
       </div>
 
       {skills.length > 0 && (
