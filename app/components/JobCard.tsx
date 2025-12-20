@@ -23,7 +23,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
   console.log('受信日付 field:', job["受信日付"]); // デバッグ用
   
   const title = job["案件名"] || job["件名"];
-  const recieved_at = job["受信日付"]; // ← "受信日時" → "受信日付" に修正
+  const recieved_at = job["受信日付"];
   const location = job["作業場所"];
   const workStyle = job["勤務形態"];
   const unitPrice = job["単価"];
@@ -50,7 +50,10 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col gap-3 h-full">
       <div>
-        <h3 className="font-semibold text-lg">{title}</h3>
+        <h3 className="font-semibold text-lg flex justify-between items-start">
+          <span>{title}</span>
+          <span className="text-xs text-slate-500 ml-2 flex-shrink-0">【{formattedReceivedAt}】</span>
+        </h3>
 
         <p className="text-sm text-slate-600 mt-1">
           {location} ／ <span className="text-sm text-slate-600 mt-1">勤務形態: {workStyle}</span>
@@ -58,9 +61,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
 
         <p className="text-sm text-slate-600 mt-1">単価: {unitPrice}</p>
         <p className="text-xs text-slate-500 mt-1">時期: {startDate}</p>
-        {formattedReceivedAt && (
-          <p className="text-xs text-slate-500 mt-1">受信日時: {formattedReceivedAt}</p>
-        )}
+        
       </div>
 
       {skills.length > 0 && (
