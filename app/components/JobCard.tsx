@@ -3,6 +3,7 @@
 interface Job {
   ID?: string;
   案件名?: string;
+  受信日時?: string;
   件名?: string;
   作業場所?: string;
   勤務形態?: string;
@@ -19,10 +20,24 @@ interface JobCardProps {
 
 export default function JobCard({ job, onOpenMail }: JobCardProps) {
   const title = job["案件名"] || job["件名"];
+  const recieved_at = job["受信日時"];
   const location = job["作業場所"];
   const workStyle = job["勤務形態"];
   const unitPrice = job["単価"];
   const startDate = job["時期"];
+
+  // 日付フォーマット（1行）
+  const formatDate = (dateString: string | undefined): string =>
+    dateString ? (() => {
+      try {
+        const d = new Date(dateString);
+        return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+      } catch {
+        return dateString;
+      }
+    })() : "";
+
+  const formattedReceivedAt = formatDate(recieved_at);
 
   const skills = (job["必須スキル"] || "")
     .split(/、|,/)
@@ -40,6 +55,9 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
 
         <p className="text-sm text-slate-600 mt-1">単価: {unitPrice}</p>
         <p className="text-xs text-slate-500 mt-1">時期: {startDate}</p>
+        {formattedReceivedAt && (
+          <p className="text-xs text-slate-500 mt-1">受信日時: {formattedReceivedAt}</p>
+        )}
       </div>
 
       {skills.length > 0 && (
