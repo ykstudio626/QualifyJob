@@ -3,7 +3,7 @@
 interface Job {
   ID?: string;
   案件名?: string;
-  受信日時?: string;
+  受信日付?: string; // ← "受信日時" → "受信日付" に修正
   件名?: string;
   作業場所?: string;
   勤務形態?: string;
@@ -19,8 +19,11 @@ interface JobCardProps {
 }
 
 export default function JobCard({ job, onOpenMail }: JobCardProps) {
+  console.log('JobCard received job:', job); // デバッグ用
+  console.log('受信日付 field:', job["受信日付"]); // デバッグ用
+  
   const title = job["案件名"] || job["件名"];
-  const recieved_at = job["受信日時"];
+  const recieved_at = job["受信日付"]; // ← "受信日時" → "受信日付" に修正
   const location = job["作業場所"];
   const workStyle = job["勤務形態"];
   const unitPrice = job["単価"];
@@ -35,7 +38,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
       } catch {
         return dateString;
       }
-    })() : "";
+    })() : "err";
 
   const formattedReceivedAt = formatDate(recieved_at);
 

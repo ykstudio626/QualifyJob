@@ -8,6 +8,7 @@ const PAGE_SIZE = 50; // 1ページあたり件数
 interface Job {
   ID?: string;
   案件名?: string;
+  受信日付?: string; // ← "受信日時" → "受信日付" に修正
   件名?: string;
   作業場所?: string;
   勤務形態?: string;
@@ -42,6 +43,8 @@ export default function JobsPage() {
         }
 
         const data = await res.json();
+        console.log('API Response:', data); // デバッグ用
+        console.log('First job:', data.records?.[0]); // 最初のジョブデータを確認
 
         const jobsArray = Array.isArray(data.records) ? data.records : [];
         setJobs(jobsArray);
