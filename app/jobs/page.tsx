@@ -164,7 +164,7 @@ export default function JobsPage() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-between items-center mb-3">
-            <h3 className="font-semibold text-lg">{title} のメール本文</h3>
+            <h3 className="font-semibold text-lg">{title}</h3>
             <button
               type="button"
               onClick={onClose}
