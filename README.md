@@ -18,6 +18,10 @@ AWS EC2 + Lambda に移行予定
 Pinecone
 
 ## 起動方法
+初回起動の場合は以下を実行
+```
+npm install
+```
 コードを変更した場合
 ```
 npm run build
