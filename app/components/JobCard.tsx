@@ -1,17 +1,5 @@
 // app/components/JobCard.tsx
-
-interface Job {
-  ID?: string;
-  案件名?: string;
-  受信日付?: string; // ← "受信日時" → "受信日付" に修正
-  件名?: string;
-  作業場所?: string;
-  勤務形態?: string;
-  単価?: string;
-  時期?: string;
-  必須スキル?: string;
-  メール本文?: string;
-}
+import { Job } from '../types/job';
 
 interface JobCardProps {
   job: Job;
