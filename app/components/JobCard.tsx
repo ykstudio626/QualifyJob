@@ -52,7 +52,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
       <div>
         <h3 className="font-semibold text-lg flex justify-between items-start">
           <span>{title}</span>
-          <span className="text-xs text-slate-500 ml-2 flex-shrink-0">【{formattedReceivedAt}】</span>
+          <span className="text-xs text-slate-500 ml-2 flex-shrink-0 font-normal">{formattedReceivedAt}</span>
         </h3>
 
         <p className="text-sm text-slate-600 mt-1">
