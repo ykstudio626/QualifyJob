@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
-import JobsPage from './jobs/page';
+import JobsPage from './pages/jobs';
 
 export default function Home() {
   const [activePage, setActivePage] = useState("jobs");
