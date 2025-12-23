@@ -32,7 +32,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
 
   const skills = (job["必須スキル"] || "")
     // .split(/、|,/)
-    .split(/・/)
+    .split(/-\s/)
     .map((s) => s.trim())
     .filter(Boolean);
 
