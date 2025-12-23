@@ -31,7 +31,8 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
   const formattedReceivedAt = formatDate(recieved_at);
 
   const skills = (job["必須スキル"] || "")
-    .split(/、|,/)
+    // .split(/、|,/)
+    .split(/・/)
     .map((s) => s.trim())
     .filter(Boolean);
 
@@ -47,8 +48,8 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
           {location} ／ <span className="text-sm text-slate-600 mt-1">勤務形態: {workStyle}</span>
         </p>
 
-        <p className="text-sm text-slate-600 mt-1">単価: {unitPrice}</p>
-        <p className="text-xs text-slate-500 mt-1">時期: {startDate}</p>
+        <p className="text-sm mt-1 text-slate-600 font-medium"><span className="font-semibold text-slate-600">単価: </span>{unitPrice}</p>
+        <p className="text-sm mt-1 text-slate-600 font-medium"><span className="font-semibold text-slate-600">時期: </span>{startDate}</p>
         
       </div>
 
