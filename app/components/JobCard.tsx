@@ -70,9 +70,15 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
         <button
           type="button"
           onClick={onOpenMail}
-          className="text-xs px-3 py-1 rounded bg-slate-800 text-white hover:bg-slate-700"
+          className="text-sm px-3 py-1 rounded bg-slate-800 text-white hover:bg-slate-700"
         >
           メール本文を見る
+        </button>
+        <button
+          type="button"
+          className="text-sm px-3 py-1 ml-3 rounded bg-green-600 text-white hover:bg-slate-700"
+        >
+          見合う要員を探す
         </button>
       </div>
     </div>
