@@ -66,7 +66,7 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
         </div>
       )}
 
-      <div className="mt-2">
+      <div className="mt-auto">
         <button
           type="button"
           onClick={onOpenMail}
