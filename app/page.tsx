@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import JobsPage from './pages/jobs';
+import QuickMatch from './pages/quickmatch';
 
 export default function Home() {
   const [activePage, setActivePage] = useState("jobs");
@@ -11,7 +12,8 @@ export default function Home() {
   const menuItems = [
     { key: "jobs", label: "案件一覧表示" },
     { key: "members", label: "要員一覧表示" },
-    { key: "stats", label: "統計情報" }
+    { key: "stats", label: "統計情報" },
+    { key: "quickmatch", label: "クイックマッチ" }
   ];
 
   const renderPage = () => {
@@ -36,6 +38,8 @@ export default function Home() {
             </p>
           </div>
         );
+      case "quickmatch":
+        return <QuickMatch />;
       default:
         return null;
     }

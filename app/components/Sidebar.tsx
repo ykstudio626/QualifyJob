@@ -36,6 +36,13 @@ export default function Sidebar({ activePage, onChangePage }: SidebarProps) {
         >
           統計情報
         </button>
+        <button
+          type="button"
+          className={itemClass("quickmatch")}
+          onClick={() => onChangePage("quickmatch")}
+        >
+          クイックマッチ
+        </button>
       </nav>
     </aside>
   );
