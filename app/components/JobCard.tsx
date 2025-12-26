@@ -1,4 +1,7 @@
 // app/components/JobCard.tsx
+import { useState } from 'react';
+import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Job } from '../types/job';
 
 interface JobCardProps {
@@ -7,6 +10,10 @@ interface JobCardProps {
 }
 
 export default function JobCard({ job, onOpenMail }: JobCardProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  console.log('JobCard received job:', job); // デバッグ用
+  console.log('受信日付 field:', job["受信日付"]); // デバッグ用
   console.log('JobCard received job:', job); // デバッグ用
   console.log('受信日付 field:', job["受信日付"]); // デバッグ用
   
@@ -36,8 +43,12 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
     .map((s) => s.trim())
     .filter(Boolean);
 
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col gap-3 h-full">
+    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col gap-3 h-full relative">
       <div>
         <h3 className="font-semibold text-lg flex justify-between items-start">
           <span>{title}</span>
@@ -81,6 +92,19 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
           見合う要員を探す
         </button>
       </div>
+
+      {/* お気に入りハートマーク */}
+      <button
+        type="button"
+        onClick={handleFavoriteClick}
+        className="absolute bottom-3 right-3 w-4 h-4 transition-colors duration-200 hover:scale-110"
+      >
+        {isFavorite ? (
+          <HeartIconSolid className="w-4 h-4 text-red-500" />
+        ) : (
+          <HeartIconOutline className="w-4 h-4 text-gray-400 hover:text-red-400" />
+        )}
+      </button>
     </div>
   );
 }
