@@ -25,7 +25,7 @@ export default function QuickMatch() {
   };
   return (
     <div className="flex-1 p-6">
-      <h2 className="text-xl font-bold mb-4">クイックマッチ</h2>
+      <h2 className="text-xl font-bold mb-4">✨Quickマッチ</h2>
 
       {/* ここにクイックマッチのコンテンツを追加予定 */}
       <div className="text-gray-500 py-12">
