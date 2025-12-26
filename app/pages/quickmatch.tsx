@@ -28,15 +28,15 @@ export default function QuickMatch() {
       <h2 className="text-xl font-bold mb-4">クイックマッチ</h2>
 
       {/* ここにクイックマッチのコンテンツを追加予定 */}
-      <div className="text-center text-gray-500 py-12">
+      <div className="text-gray-500 py-12">
         <main className="container mx-auto px-4 py-8">
         {state.results === null ? (
           <MatchingForm onResultsReceived={handleResultsReceived} />
         ) : (
-          <ResultsDisplay 
+          <ResultsDisplay
             results={state.results}
             recommendedActions={state.recommendedActions}
-            onBackToForm={handleBackToForm} 
+            onBackToForm={handleBackToForm}
           />
         )}
       </main>
