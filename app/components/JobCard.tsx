@@ -50,8 +50,8 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 flex flex-col gap-3 h-full relative">
       <div>
-        <h3 className="font-semibold text-lg flex justify-between items-start">
-          <span>{title}</span>
+        <h3 onClick={onOpenMail} className="font-semibold text-lg flex justify-between items-start">
+          <span className="cursor-pointer">{title}</span>
           <span className="text-xs text-slate-500 ml-2 flex-shrink-0 font-normal">{formattedReceivedAt}</span>
         </h3>
 
