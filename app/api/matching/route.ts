@@ -8,10 +8,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User input is required' }, { status: 400 });
     }
 
-    const apiKey = process.env.DIFY_API_KEY;
-    const apiUrl = process.env.DIFY_URL;
+    // const apiKey = process.env.DIFY_API_KEY;
+    // const apiUrl = process.env.DIFY_URL;
 
-    if (!apiKey || !apiUrl) {
+    const apiUrl = process.env.EC2_PUBLIC_IP;
+
+    if (!apiUrl) {
       return NextResponse.json({ error: 'API configuration missing' }, { status: 500 });
     }
 
@@ -21,14 +23,14 @@ export async function POST(request: NextRequest) {
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        // 'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
-      throw new Error(`DIFY API error: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
