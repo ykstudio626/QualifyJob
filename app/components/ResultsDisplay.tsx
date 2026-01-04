@@ -69,7 +69,7 @@ export default function ResultsDisplay({ results, recommendedActions, onBackToFo
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-600">氏名</p>
-                    <p className="font-semibold text-gray-800">{result.要員情報.氏名}</p>
+                    <p className="font-semibold text-gray-800">{result.要員情報.氏名}（{result.要員情報.年齢}）</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">最寄駅</p>

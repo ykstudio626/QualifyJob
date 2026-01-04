@@ -15,6 +15,7 @@ export interface Job {
 
 export interface EmployeeInfo {
   氏名: string;
+  年齢: string;
   スキル: string;
   最寄駅: string;
   希望勤務形態: string;
