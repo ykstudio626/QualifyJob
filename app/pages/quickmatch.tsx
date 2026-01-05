@@ -3,25 +3,27 @@
 import { useState } from 'react';
 import MatchingForm from '../components/MatchingForm';
 import ResultsDisplay from '../components/ResultsDisplay';
-import type { MatchingResult } from '../types/types';
+import type { MatchingResult, ComparisonChart } from '../types/types';
 
 interface AppState {
   results: MatchingResult[] | null;
   recommendedActions: string[];
+  comparisonChart?: ComparisonChart[];
 }
 
 export default function QuickMatch() {
   const [state, setState] = useState<AppState>({
     results: null,
     recommendedActions: [],
+    comparisonChart: [],
   });
 
-  const handleResultsReceived = (results: MatchingResult[], recommendedActions: string[]) => {
-    setState({ results, recommendedActions });
+  const handleResultsReceived = (results: MatchingResult[], recommendedActions: string[], comparisonChart?: ComparisonChart[]) => {
+    setState({ results, recommendedActions, comparisonChart });
   };
 
   const handleBackToForm = () => {
-    setState({ results: null, recommendedActions: [] });
+    setState({ results: null, recommendedActions: [], comparisonChart: [] });
   };
   return (
     <div className="flex-1 p-6">
@@ -36,6 +38,7 @@ export default function QuickMatch() {
           <ResultsDisplay
             results={state.results}
             recommendedActions={state.recommendedActions}
+            comparisonChart={state.comparisonChart}
             onBackToForm={handleBackToForm}
           />
         )}

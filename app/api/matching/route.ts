@@ -11,19 +11,25 @@ export async function POST(request: NextRequest) {
     // const apiKey = process.env.DIFY_API_KEY;
     // const apiUrl = process.env.DIFY_URL;
 
-    const apiUrl = process.env.EC2_PUBLIC_IP;
+    const apiBaseUrl = process.env.MATCHING_API_IP;
+    const apiUrl = `http://${apiBaseUrl}/matching_yoin`;
 
-    if (!apiUrl) {
+    if (!apiBaseUrl) {
       return NextResponse.json({ error: 'API configuration missing' }, { status: 500 });
     }
 
     // userInputはJSON文字列として渡されるのでパース
-    const payload = JSON.parse(userInput);
+    const originalPayload = JSON.parse(userInput);
+    
+    // FastAPIのMatchingRequestスキーマに合わせて変換
+    const payload = {
+      query: "要員マッチング",
+      anken: originalPayload.inputs?.anken || JSON.stringify(originalPayload)
+    };
 
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
-        // 'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
@@ -35,7 +41,6 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
 
-    // DIFY APIのレスポンスをそのまま返す
     return NextResponse.json(data);
   } catch (error) {
     console.error('API Route error:', error);
