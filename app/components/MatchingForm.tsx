@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import type { FormData, MatchingResult, MatchingResponse } from '../types/types';
+import type { FormData, MatchingResult, MatchingResponse, ComparisonChart } from '../types/types';
 import Loader from './Loader';
 
 interface MatchingFormProps {
-  onResultsReceived: (results: MatchingResult[], recommendedActions: string[]) => void;
-}
-
-interface MatchingFormProps {
-  onResultsReceived: (results: MatchingResult[], recommendedActions: string[]) => void;
+  onResultsReceived: (results: MatchingResult[], recommendedActions: string[], comparisonChart?: ComparisonChart[]) => void;
 }
 
 export default function MatchingForm({ onResultsReceived }: MatchingFormProps) {
@@ -86,43 +82,34 @@ export default function MatchingForm({ onResultsReceived }: MatchingFormProps) {
 
       const data = await response.json();
 
-      // レスポンスからテキストを抽出してパース
-      if (data.data && data.data.outputs && data.data.outputs.text) {
-        const textContent = data.data.outputs.text;
-        console.log("Text content:", textContent);
-        console.log("Text content type:", typeof textContent);
-        
-        let parsedResponse: MatchingResponse;
-        
-        // textContentが文字列の場合はJSONパースする
-        if (typeof textContent === 'string') {
-          try {
-            parsedResponse = JSON.parse(textContent);
-          } catch (parseErr) {
-            console.error("JSON parse error:", parseErr);
-            throw new Error("レスポンスのJSONパースに失敗しました");
-          }
-        } else {
-          // すでにオブジェクト/配列の場合
-          parsedResponse = textContent;
-        }
+      console.log("API Response:", data);
 
+      // 新しいAPIレスポンス形式に対応
+      if (data.status === "success" && data.result) {
+        const result = data.result;
+        
         // candidatesが存在するか確認
-        if (!parsedResponse.candidates || !Array.isArray(parsedResponse.candidates)) {
-          console.error("candidates is not an array:", parsedResponse);
+        if (!result.candidates || !Array.isArray(result.candidates)) {
+          console.error("candidates is not an array:", result);
           throw new Error("マッチング結果（candidates）は配列である必要があります");
         }
 
         // 日時フォーマットの変換と結果の処理
-        const formattedResults = parsedResponse.candidates.map((result) => ({
-          ...result,
-          受信日時: formatDateTime(result.受信日時),
+        const formattedResults = result.candidates.map((candidate) => ({
+          要員ID: candidate.要員ID,
+          受信日時: formatDateTime(candidate.受信日時),
+          要員情報: candidate.要員情報,
+          マッチ度: candidate.マッチ度,
+          理由コメント: candidate.理由コメント,
         }));
 
         // 推奨アクションを取得
-        const recommendedActions = parsedResponse.推奨アクション || [];
+        const recommendedActions = result.推奨アクション || [];
+        
+        // 比較チャートを取得
+        const comparisonChart = result.比較チャート || [];
 
-        onResultsReceived(formattedResults, recommendedActions);
+        onResultsReceived(formattedResults, recommendedActions, comparisonChart);
       } else {
         console.error("Invalid response structure:", data);
         throw new Error("Invalid response format");

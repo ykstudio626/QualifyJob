@@ -1,14 +1,15 @@
-import type { MatchingResult } from '../types/types';
+import type { MatchingResult, ComparisonChart } from '../types/types';
 
 interface ResultsDisplayProps {
   results: MatchingResult[];
   recommendedActions: string[];
+  comparisonChart?: ComparisonChart[];
   onBackToForm: () => void;
 }
 
-export default function ResultsDisplay({ results, recommendedActions, onBackToForm }: ResultsDisplayProps) {
+export default function ResultsDisplay({ results, recommendedActions, comparisonChart, onBackToForm }: ResultsDisplayProps) {
   const getMatchScore = (result: MatchingResult): number => {
-    const matchScore = result["案件とのマッチ度（100点満点）"];
+    const matchScore = result["マッチ度"];
     return typeof matchScore === 'string' ? parseInt(matchScore, 10) : matchScore;
   };
 
@@ -99,6 +100,77 @@ export default function ResultsDisplay({ results, recommendedActions, onBackToFo
           </div>
         ))}
       </div>
+
+      {/* 比較チャート */}
+      {comparisonChart && comparisonChart.length > 0 && (
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">比較チャート</h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full table-auto">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-3 px-4 font-semibold text-gray-700">要員名</th>
+                  <th className="text-center py-3 px-4 font-semibold text-gray-700">スキル</th>
+                  <th className="text-center py-3 px-4 font-semibold text-gray-700">勤務形態</th>
+                  <th className="text-center py-3 px-4 font-semibold text-gray-700">単価</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonChart.map((item, index) => {
+                  const personName = Object.keys(item)[0];
+                  const ratings = item[personName];
+                  return (
+                    <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-4 px-4 font-semibold text-gray-800">{personName}</td>
+                      <td className="py-4 px-4 text-center">
+                        <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold ${
+                          ratings.スキルのマッチ度 === '◎' ? 'bg-green-500' : 
+                          ratings.スキルのマッチ度 === '⚪' ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}>
+                          {ratings.スキルのマッチ度}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-center">
+                        <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold ${
+                          ratings.勤務形態のマッチ度 === '◎' ? 'bg-green-500' : 
+                          ratings.勤務形態のマッチ度 === '⚪' ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}>
+                          {ratings.勤務形態のマッチ度}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-center">
+                        <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold ${
+                          ratings.単価のマッチ度 === '◎' ? 'bg-green-500' : 
+                          ratings.単価のマッチ度 === '⚪' ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}>
+                          {ratings.単価のマッチ度}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4 text-sm text-gray-600">
+            <p className="mb-2">評価基準:</p>
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 text-white font-bold text-xs">◎</span>
+                <span>優秀</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white font-bold text-xs">⚪</span>
+                <span>良好</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 text-white font-bold text-xs">×</span>
+                <span>要改善</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 全体推奨アクション */}
       {recommendedActions.length > 0 && (
