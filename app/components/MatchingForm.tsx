@@ -95,7 +95,7 @@ export default function MatchingForm({ onResultsReceived }: MatchingFormProps) {
         }
 
         // 日時フォーマットの変換と結果の処理
-        const formattedResults = result.candidates.map((candidate) => ({
+        const formattedResults = result.candidates.map((candidate: any) => ({
           要員ID: candidate.要員ID,
           受信日時: formatDateTime(candidate.受信日時),
           要員情報: candidate.要員情報,
