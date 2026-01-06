@@ -13,18 +13,13 @@ export async function POST(request: NextRequest) {
 
     const apiBaseUrl = process.env.MATCHING_API_IP;
     
-    // Vercel本番環境では外部公開されたAPIエンドポイントを使用
-    const isProduction = process.env.NODE_ENV === 'production';
-    const apiUrl = isProduction 
-      ? `https://${apiBaseUrl}/matching_yoin`  // 本番環境ではHTTPS
-      : `http://${apiBaseUrl}/matching_yoin`;   // 開発環境ではHTTP
+    // APIエンドポイントURL（HTTPを使用）
+    const apiUrl = `http://${apiBaseUrl}/matching_yoin`;
 
     console.log('Environment check:', {
       NODE_ENV: process.env.NODE_ENV,
       MATCHING_API_IP: process.env.MATCHING_API_IP,
-      apiBaseUrl,
-      apiUrl,
-      isProduction
+      apiUrl
     });
 
     if (!apiBaseUrl) {
