@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
-import JobsPage from './jobs-page';
+import JobsPage from './jobs-page';  // メインの実装を使用
 import QuickMatch from './quickmatch-page';
 
 export default function Home() {
@@ -19,6 +19,7 @@ export default function Home() {
   const renderPage = () => {
     switch (activePage) {
       case "jobs":
+        // JobsPageを直接使用（AppLayoutは含まれていない）
         return <JobsPage />;
       case "members":
         return (

@@ -7,9 +7,10 @@ import { Job } from '../types/types';
 interface JobCardProps {
   job: Job;
   onOpenMail: () => void;
+  onMatching: (job: Job) => void;
 }
 
-export default function JobCard({ job, onOpenMail }: JobCardProps) {
+export default function JobCard({ job, onOpenMail, onMatching }: JobCardProps) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   console.log('JobCard received job:', job); // デバッグ用
@@ -87,7 +88,8 @@ export default function JobCard({ job, onOpenMail }: JobCardProps) {
         </button>
         <button
           type="button"
-          className="text-sm px-3 py-1 ml-3 rounded bg-green-600 text-white hover:bg-slate-700"
+          onClick={() => onMatching(job)}
+          className="text-sm px-3 py-1 ml-3 rounded bg-green-600 text-white hover:bg-green-700"
         >
           見合う要員を探す
         </button>
