@@ -96,6 +96,22 @@ export default function ResultsDisplay({ results, recommendedActions, comparison
                 <p className="text-sm text-gray-600 mb-2">理由コメント</p>
                 <p className="text-gray-800 leading-relaxed">{result.理由コメント}</p>
               </div>
+
+              {/* アクションボタン */}
+              <div className="flex justify-center pt-4">
+                <button
+                  className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 flex items-center gap-2"
+                  onClick={() => {
+                    // 要員情報詳細表示のロジックをここに実装
+                    console.log('要員情報詳細:', result.要員情報);
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Z" />
+                  </svg>
+                  要員情報
+                </button>
+              </div>
             </div>
           </div>
         ))}
