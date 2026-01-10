@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import JobCard from "../components/JobCard";
-import { Job } from '../types/types';
+import JobCard from "./components/JobCard";
+import { Job } from './types/types';
 
 const PAGE_SIZE = 50; // 1ページあたり件数
 

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import MatchingForm from '../components/MatchingForm';
-import ResultsDisplay from '../components/ResultsDisplay';
-import type { MatchingResult, ComparisonChart } from '../types/types';
+import MatchingForm from './components/MatchingForm';
+import ResultsDisplay from './components/ResultsDisplay';
+import type { MatchingResult, ComparisonChart } from './types/types';
 
 interface AppState {
   results: MatchingResult[] | null;

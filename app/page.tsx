@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
-import JobsPage from './pages/jobs';
-import QuickMatch from './pages/quickmatch';
+import JobsPage from './jobs-legacy';
+import QuickMatch from './quickmatch-legacy';
 
 export default function Home() {
   const [activePage, setActivePage] = useState("jobs");
